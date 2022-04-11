@@ -1,45 +1,20 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:orderit/Source%20Files/core/application.dart';
+import 'package:orderit/Source%20Files/core/router.dart';
 
-import 'application.dart';
 
-class TransitionRoute extends PageRouteBuilder {
-  final Widget? widget;
-  final String? routeName;
 
-  TransitionRoute({this.widget, this.routeName})
-      : super(
-    settings: RouteSettings(name: routeName),
-    pageBuilder: (BuildContext context, Animation<double> animation,
-        Animation<double> secondaryAnimation) {
-      return widget!;
-    },
-    transitionDuration: const Duration(milliseconds: 0),
-    reverseTransitionDuration: const Duration(milliseconds: 0),
-    transitionsBuilder: (
-        context,
-        animation,
-        secondaryAnimation,
-        child,
-        ) {
-      var begin = Offset.zero;
-      var end = Offset.zero;
-      var curve = Curves.ease;
-      var tween = Tween(begin: begin, end: end).chain(
-        CurveTween(curve: curve),
-      );
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
 
-class Launcher extends StatelessWidget {
+class Launcher extends StatefulWidget {
   const Launcher({Key? key}) : super(key: key);
 
+  @override
+  State<Launcher> createState() => _LauncherState();
+}
+
+class _LauncherState extends State<Launcher> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -51,26 +26,26 @@ class Launcher extends StatelessWidget {
       ),
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
-          return TransitionRoute(
+          return RouteTransition(
             widget: const Application(),
             routeName: settings.name,
           );
         } else if (settings.name == '/search') {
-          return TransitionRoute(
+          return RouteTransition(
               widget:  Application(
                 route: settings.name,
               ),
               routeName: settings.name
           );
-        } else if (settings.name == '/notification') {
-          return TransitionRoute(
+        } else if (settings.name == '/notifications') {
+          return RouteTransition(
             widget: Application(
               route: settings.name,
             ),
             routeName: settings.name,
           );
-        } else if (settings.name == '/account') {
-          return TransitionRoute(
+        } else if (settings.name == '/accounts') {
+          return RouteTransition(
             widget: Application(
               route: settings.name,
             ),

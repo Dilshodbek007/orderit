@@ -53,11 +53,11 @@ class _ApplicationState extends State<Application> {
       setState(() {
         _currentPage=1;
       });
-    }else if(widget.route=="/notification") {
+    }else if(widget.route=="/notifications") {
       setState(() {
         _currentPage=2;
       });
-    }else if(widget.route=="/account") {
+    }else if(widget.route=="/accounts") {
       setState(() {
         _currentPage=3;
       });
@@ -165,9 +165,9 @@ class _ApplicationState extends State<Application> {
                   } else if (i == 1) {
                     Navigator.pushNamed(context, '/search');
                   } else if (i == 2) {
-                    Navigator.pushNamed(context, '/notification');
+                    Navigator.pushNamed(context, '/notifications');
                   } else if (i == 3) {
-                    Navigator.pushNamed(context, '/account');
+                    Navigator.pushNamed(context, '/accounts');
                   }
                 } else {
                   setState(() {
