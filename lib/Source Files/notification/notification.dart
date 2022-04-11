@@ -1,15 +1,15 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-class AccountPage extends StatefulWidget {
-  AccountPage({Key? key}) : super(key: key);
+class Notifications extends StatefulWidget {
+  const Notifications({Key? key}) : super(key: key);
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<Notifications> createState() => _NotificationsState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _NotificationsState extends State<Notifications> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +19,13 @@ class _AccountPageState extends State<AccountPage> {
         child: ListView.builder(
             controller: ScrollController(),
             shrinkWrap: true,
-            itemCount: 35,
+            itemCount: 30,
             itemBuilder: (BuildContext context,int index)=>
                 SizedBox(
                   height: 50,
                   child: ListTile(
-                      leading: const Icon(Icons.person),
-                      trailing: const Text("Account",
+                      leading: const Icon(Icons.notifications),
+                      trailing: const Text("Bell",
                         style: TextStyle(
                             color: Colors.green,fontSize: 15),),
                       title:Text("List item $index")

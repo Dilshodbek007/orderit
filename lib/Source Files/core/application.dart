@@ -1,26 +1,25 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:orderit/pages/search_page.dart';
 
-import 'account_page.dart';
-import 'home_page.dart';
-import 'notification_page.dart';
+import '../accounts/accounts.dart';
+import '../home/home.dart';
+import '../notification/notification.dart';
+import '../search/search.dart';
 
-class CustomNavBar1 extends StatefulWidget {
-  const CustomNavBar1({
+
+class Application extends StatefulWidget {
+  const Application({
     Key? key,
     this.route,
   }) : super(key: key);
   final String? route;
 
   @override
-  State<CustomNavBar1> createState() => _CustomNavBar1State();
+  State<Application> createState() => _ApplicationState();
 }
 
-class _CustomNavBar1State extends State<CustomNavBar1> {
+class _ApplicationState extends State<Application> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List icons = [
@@ -43,13 +42,12 @@ class _CustomNavBar1State extends State<CustomNavBar1> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     if(widget.route=="/"){
-     setState(() {
-       _currentPage=0;
-     });
+      setState(() {
+        _currentPage=0;
+      });
     }
     else if(widget.route=="/search") {
       setState(() {
@@ -97,7 +95,7 @@ class _CustomNavBar1State extends State<CustomNavBar1> {
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           title: const Text(
-            'OrderIt',
+            "OrderIt",
             style: TextStyle(color: Colors.black),
           ),
           elevation: 1.2,
@@ -108,15 +106,15 @@ class _CustomNavBar1State extends State<CustomNavBar1> {
         body: myBody(),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 800
             ? Container(
-                height: 60,
-                color: Colors.white,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      for (int i = 0; i < icons.length; i++)
-                        bottomNavBarItem(i, icons[i])
-                    ]),
-              )
+          height: 60,
+          color: Colors.white,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                for (int i = 0; i < icons.length; i++)
+                  bottomNavBarItem(i, icons[i])
+              ]),
+        )
             : null,
       ),
     );
@@ -137,10 +135,10 @@ class _CustomNavBar1State extends State<CustomNavBar1> {
         Flexible(
           child: IndexedStack(
             children: <Widget>[
-              HomePage(),
-              SearchPage(),
-              NotificationPage(),
-              AccountPage()
+              Home(),
+              Search(),
+              Notifications(),
+              Accounts()
             ],
             index: _currentPage,
           ),
@@ -160,56 +158,56 @@ class _CustomNavBar1State extends State<CustomNavBar1> {
           for (int i = 0; i < 4; i++)
             menuWidth == 256
                 ? InkWell(
-                    onTap: () {
-                      if (kIsWeb) {
-                        if (i == 0) {
-                          Navigator.pushNamed(context, '/');
-                        } else if (i == 1) {
-                          Navigator.pushNamed(context, '/search');
-                        } else if (i == 2) {
-                          Navigator.pushNamed(context, '/notification');
-                        } else if (i == 3) {
-                          Navigator.pushNamed(context, '/account');
-                        }
-                      } else {
-                        setState(() {
-                          _currentPage = i;
-                        });
-                      }
-                    },
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      height: 50,
-                      child: ListView(
-                        padding: EdgeInsets.all(10),
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        children: [
-                          Icon(
-                            icons[i],
-                            color:
-                                _currentPage == i ? Colors.blue : Colors.grey,
-                          ),
-                          SizedBox(width: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Text(
-                              pageName[i],
-                              style: TextStyle(
-                                color: _currentPage == i
-                                    ? Colors.blue
-                                    : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ],
+              onTap: () {
+                if (kIsWeb) {
+                  if (i == 0) {
+                    Navigator.pushNamed(context, '/');
+                  } else if (i == 1) {
+                    Navigator.pushNamed(context, '/search');
+                  } else if (i == 2) {
+                    Navigator.pushNamed(context, '/notification');
+                  } else if (i == 3) {
+                    Navigator.pushNamed(context, '/account');
+                  }
+                } else {
+                  setState(() {
+                    _currentPage = i;
+                  });
+                }
+              },
+              child: Container(
+                alignment: Alignment.centerLeft,
+                height: 50,
+                child: ListView(
+                  padding: EdgeInsets.all(10),
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  children: [
+                    Icon(
+                      icons[i],
+                      color:
+                      _currentPage == i ? Colors.blue : Colors.grey,
+                    ),
+                    SizedBox(width: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        pageName[i],
+                        style: TextStyle(
+                          color: _currentPage == i
+                              ? Colors.blue
+                              : Colors.black,
+                        ),
                       ),
                     ),
-                  )
+                  ],
+                ),
+              ),
+            )
                 : Icon(
-                    icons[i],
-                    color: Colors.grey,
-                  ),
+              icons[i],
+              color: Colors.grey,
+            ),
         ],
       ),
     );

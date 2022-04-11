@@ -2,14 +2,13 @@
 import 'package:flutter/material.dart';
 
 
-class NotificationPage extends StatefulWidget {
-   NotificationPage({Key? key}) : super(key: key);
+class Accounts extends StatefulWidget {
+  const Accounts({Key? key}) : super(key: key);
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
+  State<Accounts> createState() => _AccountsState();
 }
 
-class _NotificationPageState extends State<NotificationPage> {
-
+class _AccountsState extends State<Accounts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +18,13 @@ class _NotificationPageState extends State<NotificationPage> {
         child: ListView.builder(
             controller: ScrollController(),
             shrinkWrap: true,
-            itemCount: 30,
+            itemCount: 35,
             itemBuilder: (BuildContext context,int index)=>
                 SizedBox(
                   height: 50,
                   child: ListTile(
-                      leading: const Icon(Icons.notifications),
-                      trailing: const Text("Bell",
+                      leading: const Icon(Icons.person),
+                      trailing: const Text("Account",
                         style: TextStyle(
                             color: Colors.green,fontSize: 15),),
                       title:Text("List item $index")
